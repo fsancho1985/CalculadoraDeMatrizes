@@ -1,24 +1,24 @@
 package br.com.sancho.entities;
 
 public class Matriz {
-    private int[][] matriz;
+    private double[][] matriz;
     private int tamanho;
 
     public Matriz(int tamanho) {
         this.tamanho = tamanho;
-        this.matriz = new int[tamanho][tamanho];
+        this.matriz = new double[tamanho][tamanho];
     }
 
-    public Matriz(int[][] elementos) {
+    public Matriz(double[][] elementos) {
         this.tamanho = elementos.length;
         this.matriz = elementos;
     }
 
-    public void setValor(int linha, int coluna, int valor) {
+    public void setValor(int linha, int coluna, double valor) {
         matriz[linha][coluna] = valor;
     }
 
-    public int getValor(int linha, int coluna) {
+    public double getValor(int linha, int coluna) {
         return matriz[linha][coluna];
     }
 
@@ -57,6 +57,37 @@ public class Matriz {
         System.out.println("\n");
     }
 
+    public double calcularDeterminante() {
+        if (tamanho == 1) {
+            return matriz[0][0];
+        }
 
+        if (tamanho == 2) {
+            return matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0];
+        }
+
+        int determinante = 0;
+
+        for (int j = 0; j < tamanho; j++) {
+            double[][] submatriz = new double[tamanho - 1][tamanho - 1];
+
+            for (int i = 1; i < tamanho; i++) {
+                int colSub = 0;
+                for (int k = 0; k < tamanho; k++) {
+                    if (k != j) {
+                        submatriz[i - 1][colSub] = matriz[i][k];
+                        colSub++;
+                    }
+                }
+            }
+
+            Matriz subMatriz = new Matriz(submatriz);
+
+            int sinal = (j % 2 == 0) ? 1 : -1;
+            determinante += sinal * matriz[0][j] * subMatriz.calcularDeterminante();
+        }
+
+        return determinante;
+    }
 
 }

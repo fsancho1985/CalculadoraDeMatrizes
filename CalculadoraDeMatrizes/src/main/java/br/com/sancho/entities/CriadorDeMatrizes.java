@@ -11,13 +11,13 @@ public class CriadorDeMatrizes {
 
     public Matriz criarMatriz(int t) {
 
-        int [][] elementos = new int[t][t];
+        double [][] elementos = new double[t][t];
 
         System.out.println("Informe os elementos da matriz:");
         for (int linha = 0; linha < t; linha++) {
             for (int coluna = 0; coluna < t; coluna++) {
                 System.out.printf("Elemento [%d][%d]: ", linha, coluna);
-                elementos[linha][coluna] = scan.nextInt();
+                elementos[linha][coluna] = scan.nextDouble();
             }
             scan.nextLine();
         }

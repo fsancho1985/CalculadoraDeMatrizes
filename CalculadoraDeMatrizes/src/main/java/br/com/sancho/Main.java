@@ -47,6 +47,7 @@ public class Main {
         matrizA.matrizOposta();
         matrizA.matrizTransposta();
 
+
         matrizB.imprimir();
         matrizB.matrizOposta();
         matrizB.matrizTransposta();
@@ -55,12 +56,31 @@ public class Main {
         subtracaoMatrizes(matrizA.getTamanho(), matrizA, matrizB).imprimir();
         multiplicacaoMatrizes(matrizA.getTamanho(), matrizA, matrizB).imprimir();
 
+        double determinanteA = matrizA.calcularDeterminante();
+        double determinanteB = matrizB.calcularDeterminante();
+        System.out.println("Determinante A: " + determinanteA);
+        System.out.println("Determinante B: " + determinanteB);
+
+
+//        int[] diagonalA = diagonalPrincipal(matrizA);
+//        for (int elementos : diagonalA) {
+//            System.out.print(elementos + " ");
+//        }
+//
+//        System.out.println("===================");
+//
+//        int[] diagonalB = diagonalPrincipal(matrizB);
+//        for (int elementos : diagonalB) {
+//            System.out.print(elementos + " ");
+//        }
+
+
         criador.fecharScanner();
     }
 
     public static Matriz somaMatrizes(int tamanhoMatrizes, Matriz matrizA, Matriz matrizB) {
 
-        int [][] elementos = new int[tamanhoMatrizes][tamanhoMatrizes];
+        double [][] elementos = new double[tamanhoMatrizes][tamanhoMatrizes];
 
         for (int i = 0; i < tamanhoMatrizes; i++) {
             for (int j = 0; j < tamanhoMatrizes; j++) {
@@ -74,7 +94,7 @@ public class Main {
 
     public static Matriz subtracaoMatrizes(int tamanhoMatrizes, Matriz matrizA, Matriz matrizB) {
 
-        int [][] elementos = new int[tamanhoMatrizes][tamanhoMatrizes];
+        double [][] elementos = new double[tamanhoMatrizes][tamanhoMatrizes];
 
         for (int i = 0; i < tamanhoMatrizes; i++) {
             for (int j = 0; j < tamanhoMatrizes; j++) {
@@ -88,7 +108,7 @@ public class Main {
 
     public static Matriz multiplicacaoMatrizes(int tamanhoMatrizes, Matriz matrizA, Matriz matrizB) {
 
-        int [][] elementos = new int[tamanhoMatrizes][tamanhoMatrizes];
+        double [][] elementos = new double[tamanhoMatrizes][tamanhoMatrizes];
 
         for (int i = 0; i < tamanhoMatrizes; i++) {
             for (int j = 0; j < tamanhoMatrizes; j++) {
@@ -103,5 +123,15 @@ public class Main {
         return new Matriz(elementos);
 
     }
+
+//    public static int[] diagonalPrincipal(Matriz matriz) {
+//        int t = matriz.getTamanho();
+//        int[] dPrincipal = new int[t];
+//        for (int i = 0; i < t; i++) {
+//            dPrincipal[i] = matriz.getValor(i,i);
+//        }
+//
+//        return dPrincipal;
+//    }
 
 }
