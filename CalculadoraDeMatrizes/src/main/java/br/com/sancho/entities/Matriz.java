@@ -90,4 +90,57 @@ public class Matriz {
         return determinante;
     }
 
+    public int calcularDeterminanteGauss() {
+        double[][] matrizTemp = new double[tamanho][tamanho];
+        for (int i = 0; i < tamanho; i++) {
+            for (int j = 0; j < tamanho; j++) {
+                matrizTemp[i][j] = matriz[i][j];
+            }
+        }
+
+        double determinante = 1.0;
+        int trocas = 0;
+
+        for (int i = 0; i < tamanho; i++) {
+            int maxRow = i;
+            for (int j = i + 1; j < tamanho; j++) {
+                if (Math.abs(matrizTemp[j][i]) > Math.abs(matrizTemp[maxRow][i])) {
+                    maxRow = j;
+                }
+            }
+
+            if (matrizTemp[maxRow][i] == 0) {
+                return 0;
+            }
+
+            if (maxRow != i) {
+                for (int j = 0; j < tamanho; j++) {
+                    double temp = matrizTemp[i][j];
+                    matrizTemp[i][j] = matrizTemp[maxRow][j];
+                    matrizTemp[maxRow][j] = temp;
+                }
+                trocas++;
+            }
+
+            for (int j = i + 1; j < tamanho; j++) {
+                if (matrizTemp[i][i] != 0) {
+                    double fator = matrizTemp[j][i] / matrizTemp[i][i];
+                    for (int k = i; k < tamanho; k++) {
+                        matrizTemp[j][k] -= fator * matrizTemp[i][k];
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < tamanho; i++) {
+            determinante *= matrizTemp[i][i];
+        }
+
+        if (trocas % 2 == 1) {
+            determinante = -determinante;
+        }
+
+        return (int) Math.round(determinante);
+    }
+
 }
